@@ -1,0 +1,377 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    height: 100vh;
+    width: 100vw;
+}
+
+/*=========NAVEGAÇÃO===========*/
+
+nav {
+    background-color: green;
+    color: white;
+}
+
+#nav_main {
+    height: 10vh;
+    width: 70vw;
+    max-width: 900px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 auto;
+}
+
+#nav_icon {
+    display: flex;
+    flex-direction: column;
+    line-height: 0.75;
+}
+
+#nav_menu {
+    display: flex;
+    align-items: center;
+}
+
+a {
+    color: white;
+    text-decoration: none;
+    cursor: pointer;
+}
+
+#nav_menu li {
+    list-style-type: none;
+}
+
+li,
+i {
+    margin: 0 1rem;
+}
+
+#menu_icon {
+    display: none;
+}
+
+.menu {
+    display: none;
+    position: fixed;
+    top: 10%;
+    background-color: green;
+    width: 100%;
+}
+
+.menu_nav_menu {
+    width: 70vw;
+    max-width: 900px;
+    margin: 0 auto;
+    text-align: end;
+    list-style-type: none;
+}
+
+.menu_nav_perfil {
+    position: absolute;
+    visibility: hidden;
+    background-color: green;
+}
+
+.menu_nav_perfil ul {
+    list-style-type: none;
+}
+
+.menu_nav_perfil ul a {
+    display: flex;
+    justify-content: center;
+}
+
+#profile_pic {
+    color: green;
+}
+
+.img_menu, .div_img, #profile_pic {
+    height: 10vh;
+}
+
+.menu_nav_perfil {
+    display: flex;
+    justify-content: center;
+}
+
+.menu_nav_perfil ul li {
+    padding: 6px;
+}
+
+ul a {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+    height: 10vh;
+}
+
+/*============MAIN=============*/
+
+/*=======HOME========*/
+
+#div_main {
+    height: 90vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    margin: 0 auto;
+}
+
+h1 {
+    font-size: 4rem;
+}
+
+hr {
+    width: 100%;
+    border-style: solid;
+    border-color: gray;
+}
+
+/*=======FORMS=======*/
+
+.div_forms {
+    height: 100vh;
+    width: 70vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin: 0 auto;
+}
+
+.div_form_button {
+    width: 30%;
+    min-width: 175px;
+    max-width: 300px;
+}
+
+.input_user {
+    height: 25px;
+    border-radius: 5px;
+    border-color: gray;
+    border-style: solid;
+}
+
+.input_user:focus {
+    box-shadow: 0 0 0 0;
+    outline: 0;
+}
+
+.input_user,
+.button {
+    width: 100%;
+}
+
+.submit {
+    margin: 5vh 0 0 0;
+}
+
+.button {
+    padding: 10px 0;
+    border-radius: 10px;
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+#div_text {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+#hr {
+    margin: 5vh 0;
+}
+
+#log_cad_msg a {
+    color: green;
+}
+
+/*=======TABELA======*/
+
+#div_table {
+    width: 80%;
+    margin: 0 auto;
+}
+
+#div_table table {
+    width: 100%;
+    border-style: solid;
+    border-width: 2px;
+    border-color: black;
+}
+
+#div_table th,
+#div_table td {
+    border-style: solid;
+    border-width: 2px;
+    padding: 3px 0;
+}
+
+#div_table .buttons {
+    display: flex;
+    justify-content: space-around;
+    margin: 0 auto;
+}
+
+#div_table td.buttons {
+    padding: 0;
+}
+
+#div_table td.buttons button {
+    background-color: white;
+    width: 100%;
+    border: none;
+    height: 30px;
+}
+
+#div_table td.buttons button:hover {
+    background-color: green;
+    color: white;
+    cursor: pointer;
+}
+
+#div_table th.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+#div_table .buttons a {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: black;
+    width: 100%;
+    height: 100%;
+}
+
+#div_table button a:hover {
+    color: white;
+}
+
+/*===========MODAL============*/
+
+.modal {
+    display: none;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    z-index: 1;
+    background-color: rgba(0, 0, 0, 0.5);
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}
+
+.submodal {
+    background-color: green;
+    color: white;
+    box-shadow: 0px 0px 15px black;
+    width: 40%;
+    height: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    overflow: auto;
+}
+
+.modal_name_text {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    text-align: center;
+}
+
+.modal_name {
+    height: 37%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.modal_text {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.modal_text label {
+    text-align: start;
+}
+
+.modal_text th {
+    text-align: justify;
+}
+
+.modal_text td {
+    text-align: end;
+}
+
+.modal_text h4 {
+    font-weight: normal;
+}
+
+.modal_text table {
+    width: 100%;
+}
+
+.modal_text table,
+.modal_text table td{
+    border-width: 0;
+}
+
+.button_user {
+    background-color: darkgreen;
+    color: white;
+    border-radius: 5px;
+    padding: 6px 0;
+    cursor: pointer;
+}
+
+
+/*=======MEDIA QUERIES========*/
+
+@media (max-width: 700px) {
+
+    /* COMPACTAR O MENU */
+    #nav_menu a, .menu_user {
+        display: none;
+    }
+
+    #menu_icon {
+        display: flex;
+        cursor: pointer;
+    }
+}
+
+@media (min-width: 700px) { 
+    .menu { 
+      visibility: hidden;
+    } 
+  } 
+
+@media (max-width: 475px) {
+    .buttons {
+        flex-direction: column;
+    }
+}
+
+@media (max-width: 400px) {
+    h1 {
+        font-size: 3rem;
+    }
+}

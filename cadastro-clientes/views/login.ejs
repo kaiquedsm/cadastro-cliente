@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="div_forms">
+        <div class="div_form_button">
+            <div class="inputs">
+                <label for="usuario">Nome de usuário</label><br>
+                <input type="text" name="usuario" class="input_user" id="usuario"><br>
+                <label for="usuario">Senha</label><br>
+                <input type="password" name="senha" class="input_user" id="senha"><br>
+                <input type="hidden" name="valor" id="login" value="login">
+            </div>
+            <div class="submit">
+                <input type="button" class="button" id="enviar" value="Login">
+            </div>
+            <hr id="hr">
+            <div id="div_text">
+                <p>Ainda não possui uma conta?</p>
+                <p id="log_cad_msg"><a href="/cadastro">Cadastrar</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/07ad214016.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+        $('#enviar').click(function () {
+            let user = $('#usuario').val();
+            let password = $('#senha').val();
+
+            var dados = {
+                usuario: user,
+                senha: password
+            }          
+
+
+            $.ajax({
+                type: 'POST',
+                url: '/login/' + user,
+                data: dados,
+                success: function (response) {
+                    if(response.status == 'success'){
+                        alert("LOGIN EFETUADO COM SUCESSO!!!")
+                        window.location.href = '/home'
+                    } else if (response.status == 'fail') {
+                        alert("LOGIN INVÁLIDO!!!")
+                    }
+                },
+                error: function (error) {
+                    alert("LOGIN INVÁLIDO!!!");
+                    console.log(error);
+                }
+            })
+        })
+    </script>
+</body>
+
+</html>

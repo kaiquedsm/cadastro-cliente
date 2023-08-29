@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cadastro</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <div class="div_forms">
+        <div class="div_form_button">
+            <div class="inputs">
+                <label for="nome">Nome Completo</label><br>
+                <input type="text" name="nome" class="input_user" id="nome"><br>
+                <label for="usuario">Nome de usuário</label><br>
+                <input type="text" name="usuario" class="input_user" id="usuario"><br>
+                <label for="cep">CEP</label><br>
+                <input type="text" name="cep" class="input_user" id="cep"><br>
+                <label for="senha">Senha</label><br>
+                <input type="password" name="senha" class="input_user" id="senha"><br>
+                <input type="hidden" name="valor" id="login" value="cadastrar">
+            </div>
+            <div class="submit">
+                <input type="button" class="button" id="enviar" value="Cadastrar">
+            </div>
+            <hr id="hr">
+            <div id="div_text">
+                <p>Já possui uma conta?</p>
+                <p id="log_cad_msg"><a href="/login">Logar</a></p>
+            </div>
+        </div>
+    </div>
+    <script src="https://kit.fontawesome.com/07ad214016.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+
+            $('#enviar').click(function () {
+                let nome = $('#nome').val();
+                let usuario = $('#usuario').val();
+                let cep = $('#cep').val();
+                let senha = $('#senha').val();
+
+                var dados = {
+                    nome: nome,
+                    usuario: usuario,
+                    cep: cep,
+                    senha: senha
+                };
+
+                $.ajax({
+                    type: 'POST',
+                    url: '/cadastro',
+                    data: dados,
+                    success: function (response) {
+                        if (response.status == 'success') {
+                                alert("DADOS CADASTRADOS COM SUCESSO");
+                                window.location.href = "/";
+                        } else if (response.status == 'fail'){
+                            alert("USUÁRIO JÁ EXISTE!!!")
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            });
+    </script>
+</body>
+
+</html>

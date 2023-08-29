@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Listagem de Usuários</title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+
+<body>
+    <nav>
+        <div id="nav_main">
+            <div id="nav_icon">
+                <h2>SistemasKS</h2>
+            </div>
+            <ul id="nav_menu">
+                <a href="/home">
+                    <li>Home</li>
+                </a>
+                <div class="menu_user">
+                    <div class="img_menu">
+                        <img src="/images/imagem_perfil.jpg" alt="profile_pic" id="profile_pic">
+                    </div>
+                    <div class="menu_nav_perfil">
+                        <ul>
+                            <a href="/perfil">
+                                <li>Perfil</li>
+                            </a>
+                            <a href="/list">
+                                <li>Usuários</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+                <li id="menu_icon"><i class="fa-solid fa-bars"></i></li>
+            </ul>
+        </div>
+        <div class="menu">
+            <ul class="menu_nav_menu">
+                <a href="/home">
+                    <li>Home</li>
+                </a>
+                <a href="/perfil">
+                    <li>Perfil</li>
+                </a>
+                <a href="/list">
+                    <li>Usuários</li>
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div id="div_main">
+            <div id="main_msg">
+                <h1>LISTA DE USUÁRIOS</h1>
+                <br>
+                <br>
+                <br>
+                <div id="div_table">
+                    <table>
+                        <tbody>
+                            <tr>
+                                <th class="names">
+                                    NOME
+                                </th>
+                                <th class="buttons">
+                                    BOTÕES
+                                </th>
+                            </tr>
+                            <% docs.forEach(function(customer) { %>
+                                <tr>
+                                    <td class="names">
+                                        <%= customer.name %>
+                                    </td>
+                                    <td class="buttons">
+                                        <button onclick="consultarUsuario('<%= customer._id %>')">Consultar</button>
+                                        <button onclick="editarUsuario('<%= customer._id %>')">Editar</button>
+                                        <button onclick="concluirExclusao('<%= customer._id %>')">Excluir</button>
+                                    </td>
+                                </tr>
+                                <% }) %>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </main>
+    <div class="modal">
+        <div class="submodal">
+            <div class="modal_name_text">
+                <div class="modal_name"></div>
+                <div class="modal_text"></div>
+            </div>
+        </div>
+    </div>
+
+
+    <script src="https://kit.fontawesome.com/07ad214016.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const modal = document.querySelector('.modal');
+        const modalnome = document.querySelector('.modal_name')
+        const submodal = document.querySelector('.modal_text')
+        const modalnametext = document.querySelector('.modal_name_text')
+        const inputuser = document.getElementsByClassName('input_user')
+        const menu = document.querySelector('.menu')
+        const menu_nav_perfil = document.querySelector('.menu_nav_perfil')
+
+        modal.style.display = "none"
+        menu.style.display = "none"
+        menu_nav_perfil.style.visibility = "hidden"
+
+        $('#menu_icon').click(function () {
+            if(menu.style.display == "none"){
+                menu.style.display = "flex"
+            } else if(menu.style.display == "flex"){
+                menu.style.display = "none"
+            }
+        })
+
+        $('.menu_user').click(function () {
+            if(menu_nav_perfil.style.visibility == "hidden"){
+                menu_nav_perfil.style.visibility = "visible"
+            } else if (menu_nav_perfil.style.visibility == "visible"){
+                menu_nav_perfil.style.visibility = "hidden"
+            }
+        })
+
+        function consultarUsuario(id) {
+            if (modal.style.display == "none") {
+                modal.style.display = "flex";
+                modalnametext.style.width = "70%";
+
+                $.ajax({
+                    type: 'GET',
+                    url: '/query/' + id,
+                    success: function (response) {
+                        if (response.status == 'success') {
+                            modalnome.innerHTML =
+                                `
+                            <h2>${response.dados.name}</h2>
+                            `
+                            submodal.innerHTML =
+                                `
+                            <table>
+                                <tbody>
+                                    <tr>
+                                        <th>Nome:</th>
+                                        <td><h4>${response.dados.name}</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <th>Usuário: </th>
+                                        <td><h4>${response.dados.user}</h4></td>
+                                    </tr>
+                                    <tr>
+                                        <th>CEP: </th>
+                                        <td><h4>${response.dados.cep}<br></h4></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                `;
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+            else {
+                modal.style.display = "none";
+            }
+        }
+
+        function editarUsuario(id) {
+            if (modal.style.display == "none") {
+                modal.style.display = "flex";
+                modalnametext.style.width = "50%";
+                submodal.style.paddingBottom = "25px"
+                $.ajax({
+                    type: 'GET',
+                    url: '/edit/' + id, 
+                    success: function (response) {
+                        if (response.status == 'success') {
+                            modalnome.innerHTML =
+                                `
+                            <h2>${response.dados.name}</h2>
+                            `
+                            submodal.innerHTML =
+                                `
+                                <label for="nome">Nome Completo</label>
+                                <input type="text" name="nome" class="input_user" id="nome" value="${response.dados.name}">
+                                
+                                <label for="usuario">Nome de usuário</label>
+                                <input type="text" name="usuario" class="input_user" id="usuario" value="${response.dados.user}">
+                                
+                                <label for="cep">CEP</label>
+                                <input type="text" name="cep" class="input_user" id="cep" value="${response.dados.cep}">
+
+                                <br><button class="button_user" onclick="concluirEdicao('${id}')">Editar</button>
+                                `;
+                            for (let i = 0; i < inputuser.length; i++) {
+                                inputuser[i].style.backgroundColor = "darkgreen";
+                                inputuser[i].style.borderColor = "darkgreen";
+                                inputuser[i].style.color = "white";
+                            }
+                        }
+                    },
+                    error: function (error) {
+                        console.log(error);
+                    }
+                });
+            }
+            else {
+                modal.style.display = "none";
+            }
+        }
+
+        function concluirEdicao(id) {
+            let nome = $('#nome').val();
+            let usuario = $('#usuario').val();
+            let cep = $('#cep').val();
+
+            var dados = {
+                nome: nome,
+                usuario: usuario,
+                cep: cep,
+            };
+
+            $.ajax({
+                type: 'POST',
+                url: '/edit/' + id,
+                data: dados,
+                success: function (response) {
+                    if (response.status == 'success') {
+                        window.location.reload()
+                    }
+                },
+                error: function (error) {
+                    console.log(error);
+                }
+            })
+        }
+
+        function concluirExclusao(id) {
+            var confirmDelete = confirm('Tem certeza que deseja excluir esse funcionário?');
+            if (confirmDelete == true) {
+                excluirFuncionario(id);
+            }
+        }
+
+        function excluirFuncionario(id) {
+            $.ajax({
+                type: 'GET',
+                url: '/delete/' + id,
+                success: function (response) {
+                    if (response.status == 'success') {
+                        window.location.reload()
+                    }
+                }
+            })
+        }
+
+        window.onclick = function (event) {
+            let modal = document.querySelector('.modal');
+            if (event.target == modal) {
+                modal.style.display = "none";
+            }
+        }
+    </script>
+</body>
+
+</html>

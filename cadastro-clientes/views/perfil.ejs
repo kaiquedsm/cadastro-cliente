@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>
+        <%= doc.name %>
+    </title>
+    <link rel="stylesheet" href="/stylesheets/style.css">
+</head>
+<style>
+
+</style>
+<body>
+    <nav>
+        <div id="nav_main">
+            <div id="nav_icon">
+                <h2>SistemasKS</h2>
+            </div>
+            <ul id="nav_menu">
+                <a href="/home">
+                    <li>Home</li>
+                </a>
+                <div class="menu_user">
+                    <div class="img_menu">
+                        <img src="/images/imagem_perfil.jpg" alt="profile_pic" id="profile_pic">
+                    </div>
+                    <div class="menu_nav_perfil">
+                        <ul>
+                            <a href="/perfil">
+                                <li>Perfil</li>
+                            </a>
+                            <a href="/list">
+                                <li>Usuários</li>
+                            </a>
+                        </ul>
+                    </div>
+                </div>
+                <li id="menu_icon"><i class="fa-solid fa-bars"></i></li>
+            </ul>
+        </div>
+        <div class="menu">
+            <ul class="menu_nav_menu">
+                <a href="/home">
+                    <li>Home</li>
+                </a>
+                <a href="/perfil">
+                    <li>Perfil</li>
+                </a>
+                <a href="/list">
+                    <li>Usuários</li>
+                </a>
+            </ul>
+        </div>
+    </nav>
+    <main>
+        <div id="div_main">
+            <div id="main_msg">
+                <h1>DADOS DO USUÁRIO</h1>
+                <table>
+                    <tbody>
+                        <tr>
+                            <th>Nome</th>
+                            <td>
+                                <%= docs.name %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>Usuário</th>
+                            <td>
+                                <%= docs.user %>
+                            </td>
+                        </tr>
+                        <tr>
+                            <th>CEP</th>
+                            <td>
+                                <%= docs.cep %>
+                            </td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+        </div>
+    </main>
+    <script src="https://kit.fontawesome.com/07ad214016.js" crossorigin="anonymous"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script>
+        const main_msg = document.getElementById("main_msg");
+        const menu = document.querySelector('.menu')
+        const menu_nav_perfil = document.querySelector('.menu_nav_perfil')
+
+        menu.style.display = "none"
+        menu_nav_perfil.style.visibility = "hidden"
+
+        $('#menu_icon').click(function () {
+            if (menu.style.display == "none") {
+                menu.style.display = "flex"
+            } else if (menu.style.display == "flex") {
+                menu.style.display = "none"
+            }
+        })
+
+        $('.menu_user').click(function () {
+            if (menu_nav_perfil.style.visibility == "hidden") {
+                menu_nav_perfil.style.visibility = "visible"
+            } else if (menu_nav_perfil.style.visibility == "visible") {
+                menu_nav_perfil.style.visibility = "hidden"
+            }
+        })
+
+    </script>
+</body>
+
+</html>
